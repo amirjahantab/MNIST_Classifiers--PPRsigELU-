@@ -73,37 +73,21 @@ x & \text{if } 0 \leq x \leq 1.0 \\
 $$
 
 Where:
-- $ \ \sigma(x) = \frac{1}{1 + \exp(-x)} $ is the sigmoid function.
-- $ \ \alpha $ and $\ \beta $ are learnable parameters initialized using the `GlorotNormal` initializer.
-
-### Explanation of Each Region
-
-1. **Region 1 $ (x > 1.0) $**:
-   - For inputs greater than 1, the function scales the input by a product of the sigmoid function and the learnable parameter $ \alpha $, and then adds the original input $x$.
-   - This region smoothly adjusts the output based on both $x$ and $ \alpha $, allowing a flexible response that can adapt to the data during training.
-
-2. **Region 2 $ (0 \leq x \leq 1.0) $**:
-   - In this middle region, the function behaves linearly. The output is exactly the input $x$. This part of the function is continuous with no modifications, ensuring a smooth transition between the other two regions.
-
-3. **Region 3 $ (x < 0) $**:
-   - For negative inputs, the function behaves similarly to an Exponential Linear Unit (ELU) but scaled by $  \beta $.
-   - The expression $\ \exp(x) - 1 $ allows the output to be smooth and gradually approach zero as $x$ becomes more negative, with the scaling factor $  \beta $ providing a way to adjust this region’s sensitivity.
-
-### Significance of Parameters
-
-- **$ \alpha $ and $  \beta $ as Learnable Parameters:**
-  - These parameters are adjusted during training to minimize the loss function.
-  - **$ \alpha $** controls the slope for positive values greater than 1.
-  - **$  \beta $** controls the slope for negative values less than 0.
+- $$\ \sigma(x) = \frac{1}{1 + \exp(-x)} $$ is the sigmoid function.
+- $$\ \alpha $$ and $$\ \beta $$ are learnable parameters initialized using the `GlorotNormal` initializer.
 
 ## Model Performance
 
 - **Training Accuracy and Loss:**
   - The accuracy and loss during training are plotted and analyzed to understand the model's learning behavior.
+  - $$\ Train Accuracy: 99.90$$%
+  - $$\ Train Loss:  0.00352$$
+
 
 - **Test Evaluation:**
   - The final accuracy on the test set is computed to evaluate the model's generalization capability.
-
+  - $$\ Test Accuracy: 98.89$$%
+  - $$\ Test Loss:  0.04715$$
 ## Conclusion
 
 This project explores the implementation of a custom activation function in a CNN model for digit classification using the MNIST dataset. The PPRsigELU activation function introduces flexibility through learnable parameters, potentially improving the model's performance. Further experiments can be conducted to compare this activation function with other standard functions like ReLU, ELU, and Sigmoid to analyze its effectiveness.
